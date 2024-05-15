@@ -31,4 +31,7 @@ public interface MovieControllerSwagger {
     })
     ResponseEntity likeMovie(@PathVariable Long movieId);
 
+    @Operation(summary = "영화 좋아요 삭제 API")
+    ResponseEntity unlikeMovie(@PathVariable Long movieId);
+
 }

@@ -53,4 +53,12 @@ public class MovieController implements MovieControllerSwagger {
                 .build();
     }
 
+    @DeleteMapping("/{movieId}/tickets")
+    public ResponseEntity cancelTicket(
+            @PathVariable Long movieId
+    ) {
+        TicketService.cancelTicket(movieId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

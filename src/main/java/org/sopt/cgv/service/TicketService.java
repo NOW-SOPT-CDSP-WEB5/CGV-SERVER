@@ -9,6 +9,9 @@ import org.sopt.cgv.service.dto.TicketCreateRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class TicketService {
@@ -24,5 +27,11 @@ public class TicketService {
         Ticket ticket = Ticket.create(theater);
         ticketRepository.save(ticket);
         return ticket.getId().toString();
+    }
+
+    @Transactional
+    public void cancelTicket(Long movieId) {
+        List<Ticket> tickets = ticketRepository.findByMovieId(movieId);
+        ticketRepository.deleteAll(tickets);
     }
 }

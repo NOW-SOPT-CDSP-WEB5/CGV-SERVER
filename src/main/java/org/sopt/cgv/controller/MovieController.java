@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/movies")
+@RequestMapping("/api/v1")
 public class MovieController implements MovieControllerSwagger {
 
     private final MovieService movieService;
 
-    @GetMapping("/{movieId}/details")
+    @GetMapping("/movies/{movieId}")
     public ResponseEntity<MovieDetailRequestDto> getMovieDetail(
             @PathVariable Long movieId
     ) {

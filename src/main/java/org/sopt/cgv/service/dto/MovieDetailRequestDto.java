@@ -4,9 +4,10 @@ import org.sopt.cgv.domain.Movie;
 
 public record MovieDetailRequestDto (
         String title,
-        String script
+        String script,
+        boolean isLiked
 ) {
-    public static MovieDetailRequestDto of(Movie movie) {
-        return new MovieDetailRequestDto(movie.getTitle(), movie.getScript());
+    public static MovieDetailRequestDto of(Movie movie, boolean isLiked) {
+        return new MovieDetailRequestDto(movie.getTitle(), movie.getScript(), isLiked);
     }
 }

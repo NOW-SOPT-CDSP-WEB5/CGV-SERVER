@@ -1,18 +1,18 @@
 package org.sopt.cgv.service;
 
 import lombok.RequiredArgsConstructor;
-import org.sopt.cgv.domain.Hearts;
+import org.sopt.cgv.domain.Heart;
 import org.sopt.cgv.domain.Movie;
-import org.sopt.cgv.repository.HeartsRepository;
+import org.sopt.cgv.repository.HeartRepository;
 import org.sopt.cgv.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class HeartsService {
+public class HeartService {
 
-    private final HeartsRepository heartsRepository;
+    private final HeartRepository heartRepository;
     private final MovieRepository movieRepository;
 
     @Transactional
@@ -20,16 +20,16 @@ public class HeartsService {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 영화를 찾을 수 없습니다.")
                 );
-        Hearts hearts = Hearts.create(movie);
-        heartsRepository.save(hearts);
-        return hearts.getId().toString();
+        Heart heart = Heart.create(movie);
+        heartRepository.save(heart);
+        return heart.getId().toString();
     }
 
     @Transactional
     public void deleteHearts(Long movieId) {
-        Hearts hearts = heartsRepository.findByMovieId(movieId)
+        Heart heart = heartRepository.findByMovieId(movieId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 영화의 좋아요를 찾을 수 없습니다.")
                 );
-        heartsRepository.delete(hearts);
+        heartRepository.delete(heart);
     }
 }

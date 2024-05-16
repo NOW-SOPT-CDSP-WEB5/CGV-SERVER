@@ -1,7 +1,7 @@
 package org.sopt.cgv.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sopt.cgv.service.HeartsService;
+import org.sopt.cgv.service.HeartService;
 import org.sopt.cgv.service.MovieService;
 import org.sopt.cgv.service.TicketService;
 import org.sopt.cgv.service.dto.MovieDetailRequestDto;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class MovieController implements MovieControllerSwagger {
 
     private final MovieService movieService;
-    private final HeartsService heartsService;
+    private final HeartService heartService;
     private final TicketService TicketService;
 
     @GetMapping("/movies/{movieId}")
@@ -26,24 +26,24 @@ public class MovieController implements MovieControllerSwagger {
         return ResponseEntity.ok(movieService.findMovieDetailById(movieId));
     }
 
-    @PostMapping("/{movieId}/hearts")
+    @PostMapping("/movies/{movieId}/hearts")
     public ResponseEntity likeMovie(
             @PathVariable Long movieId
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", heartsService.addHearts(movieId))
+                .header("Location", heartService.addHearts(movieId))
                 .build();
     }
 
-    @DeleteMapping("/{movieId}/hearts")
+    @DeleteMapping("/movies/{movieId}/hearts")
     public ResponseEntity unlikeMovie(
             @PathVariable Long movieId
     ) {
-        heartsService.deleteHearts(movieId);
+        heartService.deleteHearts(movieId);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{movieId}/tickets")
+    @PostMapping("/movies/{movieId}/tickets")
     public ResponseEntity buyTicket(
             @PathVariable Long movieId,
             @RequestBody TicketCreateRequestDto ticketCreateRequestDto
@@ -53,12 +53,11 @@ public class MovieController implements MovieControllerSwagger {
                 .build();
     }
 
-    @DeleteMapping("/{movieId}/tickets")
+    @DeleteMapping("/movies/{movieId}/tickets")
     public ResponseEntity cancelTicket(
             @PathVariable Long movieId
     ) {
         TicketService.cancelTicket(movieId);
         return ResponseEntity.noContent().build();
     }
-
 }

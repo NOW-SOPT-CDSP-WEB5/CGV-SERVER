@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Hearts {
+public class Heart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +18,12 @@ public class Hearts {
     private Movie movie;
 
     @Builder
-    private Hearts(Movie movie) {
+    private Heart(Movie movie) {
         this.movie = movie;
     }
 
-    public static Hearts create(Movie movie) {
-        return Hearts.builder()
+    public static Heart create(Movie movie) {
+        return Heart.builder()
                 .movie(movie)
                 .build();
     }

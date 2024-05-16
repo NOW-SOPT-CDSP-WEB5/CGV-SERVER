@@ -1,7 +1,11 @@
 package org.sopt.cgv.repository;
 
-import org.sopt.cgv.domain.hearts;
+import org.sopt.cgv.domain.Hearts;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HeartsRepository extends JpaRepository<hearts, Long> {
+import java.util.Optional;
+
+public interface HeartsRepository extends JpaRepository<Hearts, Long> {
+
+    Optional<Hearts> findByMovieId(Long movieId);
 }

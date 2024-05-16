@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MovieController implements MovieControllerSwagger {
 
     private final MovieService movieService;
-    private final HeartsService likeService;
+    private final HeartsService heartsService;
 
     @GetMapping("/movies/{movieId}")
     public ResponseEntity<MovieDetailRequestDto> getMovieDetail(
@@ -28,7 +28,15 @@ public class MovieController implements MovieControllerSwagger {
             @PathVariable Long movieId
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("Location", likeService.addHearts(movieId))
+                .header("Location", heartsService.addHearts(movieId))
                 .build();
+    }
+
+    @DeleteMapping("/{movieId}/hearts")
+    public ResponseEntity unlikeMovie(
+            @PathVariable Long movieId
+    ) {
+        heartsService.deleteHearts(movieId);
+        return ResponseEntity.noContent().build();
     }
 }

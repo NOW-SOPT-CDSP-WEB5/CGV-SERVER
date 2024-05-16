@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/movies")
+@RequestMapping("/api/v1")
 public class MovieController implements MovieControllerSwagger {
 
     private final MovieService movieService;
     private final HeartService heartService;
     private final TicketService TicketService;
 
-    @GetMapping("/{movieId}/details")
+    @GetMapping("/movies/{movieId}")
     public ResponseEntity<MovieDetailRequestDto> getMovieDetail(
             @PathVariable Long movieId
     ) {
         return ResponseEntity.ok(movieService.findMovieDetailById(movieId));
     }
 
-    @PostMapping("/{movieId}/hearts")
+    @PostMapping("/movies/{movieId}/hearts")
     public ResponseEntity likeMovie(
             @PathVariable Long movieId
     ) {
@@ -35,7 +35,7 @@ public class MovieController implements MovieControllerSwagger {
                 .build();
     }
 
-    @DeleteMapping("/{movieId}/hearts")
+    @DeleteMapping("/movies/{movieId}/hearts")
     public ResponseEntity unlikeMovie(
             @PathVariable Long movieId
     ) {
@@ -43,7 +43,7 @@ public class MovieController implements MovieControllerSwagger {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{movieId}/tickets")
+    @PostMapping("/movies/{movieId}/tickets")
     public ResponseEntity buyTicket(
             @PathVariable Long movieId,
             @RequestBody TicketCreateRequestDto ticketCreateRequestDto
@@ -53,7 +53,7 @@ public class MovieController implements MovieControllerSwagger {
                 .build();
     }
 
-    @DeleteMapping("/{movieId}/tickets")
+    @DeleteMapping("/movies/{movieId}/tickets")
     public ResponseEntity cancelTicket(
             @PathVariable Long movieId
     ) {

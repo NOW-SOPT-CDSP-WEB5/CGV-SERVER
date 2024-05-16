@@ -60,5 +60,4 @@ public class MovieController implements MovieControllerSwagger {
         TicketService.cancelTicket(movieId);
         return ResponseEntity.noContent().build();
     }
-
 }

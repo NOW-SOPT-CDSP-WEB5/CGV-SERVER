@@ -17,9 +17,12 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.LAZY)
     private Theater theater;
 
+    private Long movieId;
+
     @Builder
     private Ticket(Theater theater) {
         this.theater = theater;
+        this.movieId = theater.getMovie().getId();
     }
 
     public static Ticket create(Theater theater) {

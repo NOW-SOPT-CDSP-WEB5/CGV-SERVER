@@ -44,4 +44,7 @@ public interface MovieControllerSwagger {
             })
     ResponseEntity buyTicket(@PathVariable Long movieId, @RequestBody TicketCreateRequestDto ticketCreateRequestDto);
 
+    @Operation(summary = "영화 예매 취소 API")
+    ResponseEntity cancelTicket(@PathVariable Long movieId);
+
 }

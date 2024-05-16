@@ -13,8 +13,8 @@ public class MovieService {
     private final MovieRepository MovieRepository;
 
     public Movie findById(Long movieId) {
-        return MovieRepository.findById(movieId).orElseThrow(
-                () -> new IllegalArgumentException("해당 영화를 찾을 수 없습니다.")
+        return MovieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 영화를 찾을 수 없습니다.")
         );
     }
 

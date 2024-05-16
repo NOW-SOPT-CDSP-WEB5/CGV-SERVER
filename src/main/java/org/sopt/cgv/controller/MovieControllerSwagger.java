@@ -22,4 +22,13 @@ public interface MovieControllerSwagger {
             }
     )
     ResponseEntity<MovieDetailRequestDto> getMovieDetail(@PathVariable Long movieId);
+
+    @Operation(summary = "영화 좋아요 클릭 API")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "201", description = "Like added successfully"),
+                    @ApiResponse(responseCode = "404", description = "Movie not found")
+    })
+    ResponseEntity likeMovie(@PathVariable Long movieId);
+
 }

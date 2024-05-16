@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.sopt.cgv.service.dto.MovieDetailRequestDto;
+import org.sopt.cgv.service.dto.TicketCreateRequestDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "영화 API", description = "영화 관련 API")
 public interface MovieControllerSwagger {
@@ -33,5 +35,13 @@ public interface MovieControllerSwagger {
 
     @Operation(summary = "영화 좋아요 삭제 API")
     ResponseEntity unlikeMovie(@PathVariable Long movieId);
+
+    @Operation(summary = "영화 예매 API")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "201", description = "Ticket added successfully"),
+                    @ApiResponse(responseCode = "404", description = "Theater not found")
+            })
+    ResponseEntity buyTicket(@PathVariable Long movieId, @RequestBody TicketCreateRequestDto ticketCreateRequestDto);
 
 }

@@ -3,7 +3,9 @@ package org.sopt.cgv.controller;
 import lombok.RequiredArgsConstructor;
 import org.sopt.cgv.service.HeartsService;
 import org.sopt.cgv.service.MovieService;
+import org.sopt.cgv.service.TicketService;
 import org.sopt.cgv.service.dto.MovieDetailRequestDto;
+import org.sopt.cgv.service.dto.TicketCreateRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ public class MovieController implements MovieControllerSwagger {
 
     private final MovieService movieService;
     private final HeartsService heartsService;
+    private final TicketService TicketService;
 
     @GetMapping("/movies/{movieId}")
     public ResponseEntity<MovieDetailRequestDto> getMovieDetail(
@@ -39,4 +42,15 @@ public class MovieController implements MovieControllerSwagger {
         heartsService.deleteHearts(movieId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{movieId}/tickets")
+    public ResponseEntity buyTicket(
+            @PathVariable Long movieId,
+            @RequestBody TicketCreateRequestDto ticketCreateRequestDto
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header("Location", TicketService.buyTicket(movieId, ticketCreateRequestDto))
+                .build();
+    }
+
 }

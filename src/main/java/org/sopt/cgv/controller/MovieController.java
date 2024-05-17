@@ -1,6 +1,7 @@
 package org.sopt.cgv.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.sopt.cgv.dto.MoviesDto;
 import org.sopt.cgv.service.HeartService;
 import org.sopt.cgv.service.MovieService;
 import org.sopt.cgv.service.TicketService;
@@ -59,5 +60,10 @@ public class MovieController implements MovieControllerSwagger {
     ) {
         TicketService.cancelTicket(movieId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/movies")
+    public ResponseEntity<MoviesDto> getMovies() {
+        return ResponseEntity.ok(movieService.getMovies());
     }
 }

@@ -31,6 +31,6 @@ public class MovieService {
     }
 
     public MoviesDto getMovies() {
-        return MoviesDto.of(MovieRepository.findAll());
+        return MoviesDto.of(MovieRepository.findAllByOrderByRank());
     }
 }

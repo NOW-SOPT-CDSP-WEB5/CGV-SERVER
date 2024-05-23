@@ -31,10 +31,10 @@ public interface MovieControllerSwagger {
                     @ApiResponse(responseCode = "201", description = "Like added successfully"),
                     @ApiResponse(responseCode = "404", description = "Movie not found")
     })
-    ResponseEntity likeMovie(@PathVariable Long movieId);
+    ResponseEntity<Void> likeMovie(@PathVariable Long movieId);
 
     @Operation(summary = "영화 좋아요 삭제 API")
-    ResponseEntity unlikeMovie(@PathVariable Long movieId);
+    ResponseEntity<Void> unlikeMovie(@PathVariable Long movieId);
 
     @Operation(summary = "영화 예매 API")
     @ApiResponses(
@@ -42,9 +42,9 @@ public interface MovieControllerSwagger {
                     @ApiResponse(responseCode = "201", description = "Ticket added successfully"),
                     @ApiResponse(responseCode = "404", description = "Theater not found")
             })
-    ResponseEntity buyTicket(@PathVariable Long movieId, @RequestBody TicketCreateRequestDto ticketCreateRequestDto);
+    ResponseEntity<Void> buyTicket(@PathVariable Long movieId, @RequestBody TicketCreateRequestDto ticketCreateRequestDto);
 
     @Operation(summary = "영화 예매 취소 API")
-    ResponseEntity cancelTicket(@PathVariable Long movieId);
+    ResponseEntity<Void> cancelTicket(@PathVariable Long movieId);
 
 }

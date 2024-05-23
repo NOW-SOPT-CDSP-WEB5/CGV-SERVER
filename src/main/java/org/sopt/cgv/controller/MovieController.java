@@ -28,7 +28,7 @@ public class MovieController implements MovieControllerSwagger {
     }
 
     @PostMapping("/movies/{movieId}/hearts")
-    public ResponseEntity likeMovie(
+    public ResponseEntity<Void> likeMovie(
             @PathVariable Long movieId
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -37,7 +37,7 @@ public class MovieController implements MovieControllerSwagger {
     }
 
     @DeleteMapping("/movies/{movieId}/hearts")
-    public ResponseEntity unlikeMovie(
+    public ResponseEntity<Void> unlikeMovie(
             @PathVariable Long movieId
     ) {
         heartService.deleteHearts(movieId);
@@ -45,7 +45,7 @@ public class MovieController implements MovieControllerSwagger {
     }
 
     @PostMapping("/movies/{movieId}/tickets")
-    public ResponseEntity buyTicket(
+    public ResponseEntity<Void> buyTicket(
             @PathVariable Long movieId,
             @RequestBody TicketCreateRequestDto ticketCreateRequestDto
     ) {
@@ -55,7 +55,7 @@ public class MovieController implements MovieControllerSwagger {
     }
 
     @DeleteMapping("/movies/{movieId}/tickets")
-    public ResponseEntity cancelTicket(
+    public ResponseEntity<Void> cancelTicket(
             @PathVariable Long movieId
     ) {
         TicketService.cancelTicket(movieId);
